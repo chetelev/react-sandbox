@@ -1,12 +1,9 @@
 import { Component } from 'react';
+import Carousel from './Carousel';
 import { withRouter } from 'react-router-dom';
 
 class Details extends Component {
-  constructor() {
-    super();
-
-    this.state = { loading: true };
-  }
+  state = { loading: true };
 
   async componentDidMount() {
     const res = await fetch(
@@ -24,9 +21,11 @@ class Details extends Component {
   }
 
   render() {
-    const { animal, breed, city, state, description, name } = this.state;
+    const { animal, breed, city, state, description, name, images } =
+      this.state;
     return (
       <div className="details">
+        <Carousel images={images} />
         <h1>{name}</h1>
         <h2>
           {animal} - {breed} - {city}, {state}
