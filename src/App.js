@@ -3,8 +3,7 @@ import Details from './Details';
 import SearchParams from './SearchParams';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import ThemeContext from './ThemeContext';
-import { useState } from 'react/cjs/react.production.min';
-import { StrictMode } from 'react/cjs/react.development';
+import { useState, StrictMode } from 'react';
 
 const App = () => {
   const theme = useState('darkblue');
