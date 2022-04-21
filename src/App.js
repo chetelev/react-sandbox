@@ -1,16 +1,22 @@
 import ReactDOM from 'react-dom';
-import Details from './Details';
-import SearchParams from './SearchParams';
+import { useState, StrictMode, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
 import ThemeContext from './ThemeContext';
-import { useState, StrictMode } from 'react';
+
+// lazy loading
+const SearchParams = lazy(() => import('./SearchParams'));
+const Details = lazy(() => import('./Details'));
 
 const App = () => {
   const theme = useState('gray');
   return (
     <ThemeContext.Provider value={theme}>
       <div
-        className="p-0 m-0  bg-gradient-to-b
+        className="
+        p-0 
+        m-0  
+        bg-gradient-to-b
         from-purple-400
         via-pink-500
         to-red-500"
@@ -50,7 +56,9 @@ const App = () => {
 
 ReactDOM.render(
   <StrictMode>
-    <App />{' '}
+    <Suspense fallback={<h2>Loading, be patient you weirdo :)</h2>}>
+      <App />{' '}
+    </Suspense>
   </StrictMode>,
   document.getElementById('root')
 );

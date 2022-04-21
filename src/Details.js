@@ -1,8 +1,11 @@
-import { Component } from 'react';
-import Carousel from './Carousel';
+import { Component, lazy } from 'react';
 import { withRouter } from 'react-router-dom';
+
+import Carousel from './Carousel';
 import ErrorBoundary from './ErrorBoundary';
-import Modal from './Modal';
+
+// lazy loading modal
+const Modal = lazy(() => import('./Modal'));
 
 class Details extends Component {
   state = { loading: true, showModal: false };
@@ -43,8 +46,18 @@ class Details extends Component {
             <div>
               <h1>Would you like to adopt me ?</h1>
               <div className="buttons">
-                <button onClick={this.adopt}>Yes</button>
-                <button onClick={this.toggleModal}>No</button>
+                <button
+                  className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  onClick={this.adopt}
+                >
+                  Yes
+                </button>
+                <button
+                  className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  onClick={this.toggleModal}
+                >
+                  No
+                </button>
               </div>
             </div>
           </Modal>
