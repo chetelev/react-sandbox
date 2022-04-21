@@ -6,7 +6,9 @@
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/index.html",
+    "build": "parcel build",
+    "start": "npm -s run build && node dist/backend/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -31,11 +33,28 @@
     "tailwindcss": "^3.0.24"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "express": "^4.17.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-router-dom": "^5.2.0"
   },
   "browserslist": [
     "last 2 Chrome versions"
-  ]
+  ],
+  "targets": {
+    "frontend": {
+      "source": [
+        "src/index.html"
+      ],
+      "publicUrl": "/frontend"
+    },
+    "backend": {
+      "source": "server/index.js",
+      "optimize": false,
+      "context": "node",
+      "engines": {
+        "node": ">16"
+      }
+    }
+  }
 }

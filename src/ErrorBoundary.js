@@ -1,4 +1,4 @@
-import { Component } from 'react/cjs/react.production.min';
+import { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 class ErrorBoundary extends Component {
