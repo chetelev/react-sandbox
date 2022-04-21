@@ -6,7 +6,7 @@ import ThemeContext from './ThemeContext';
 import { useState, StrictMode } from 'react';
 
 const App = () => {
-  const theme = useState('darkblue');
+  const theme = useState('gray');
   return (
     <ThemeContext.Provider value={theme}>
       <div
