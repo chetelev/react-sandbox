@@ -1,7 +1,11 @@
-import { useEffect, useRef, FunctionComponent, MutableRefObject } from 'react';
+import React, { MutableRefObject, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-const Modal: FunctionComponent = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+const Modal: React.FC<Props> = ({ children }) => {
   const elRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
   if (!elRef.current) {
     elRef.current = document.createElement('div');
