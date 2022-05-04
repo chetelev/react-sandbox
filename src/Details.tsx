@@ -3,7 +3,7 @@ import { Component, lazy } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Carousel from './Carousel';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from './ErrorBoundary.tsx';
 import { PetAPIResponse, Animal } from './models/APIResponsesTypes';
 
 // lazy loading modal

@@ -1,14 +1,21 @@
-import { Component } from 'react';
+import { Component, ErrorInfo } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-class ErrorBoundary extends Component {
+interface IErrorBoundaryProps {
+  hasError: boolean;
+  redirect: boolean;
+  children: string;
+}
+
+class ErrorBoundary extends Component<IErrorBoundaryProps> {
   state = { hasError: false, redirect: false };
 
   static getDerivedStateFromError() {
     return { hasError: true };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.log(this.props);
     // log to sentry, azure monitor, trackjs etc..
     console.error('ErrorBoundary caught in error', error, info);
 
@@ -17,7 +24,8 @@ class ErrorBoundary extends Component {
     }, 5000);
   }
 
-  render() {
+  render(): React.ReactNode {
+    console.log(this.props);
     if (this.state.redirect) return <Redirect to="/" />;
     if (this.state.hasError) {
       return (
