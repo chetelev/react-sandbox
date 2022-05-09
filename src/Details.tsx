@@ -1,17 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import Carousel from './Carousel';
+import ErrorBoundary from './ErrorBoundary';
+import { Animal, PetAPIResponse } from './models/APIResponsesTypes';
 import { Component, lazy } from 'react';
 import { withRouter } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import Carousel from './Carousel';
-import ErrorBoundary from './ErrorBoundary.tsx';
-import { PetAPIResponse, Animal } from './models/APIResponsesTypes';
 
 // lazy loading modal
 const Modal = lazy(() => import('./Modal'));
 
 interface IProps {
-  params: {
-    id?: string;
+  match: {
+    params: {
+      id?: string;
+    };
   };
 }
 
@@ -29,6 +31,9 @@ class Details extends Component<IProps> {
   };
 
   async componentDidMount() {
+    if (!this.props.match.params.id) {
+      return;
+    }
     const res = await fetch(
       `http://pets-v2.dev-apis.com/pets?id=${this.props.match.params.id}`
     );
@@ -85,7 +90,6 @@ class Details extends Component<IProps> {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const DetailsWithRouter = withRouter(Details);
 
 export default function DetailsWithErrorBoundary() {

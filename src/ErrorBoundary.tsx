@@ -15,7 +15,6 @@ class ErrorBoundary extends Component<IErrorBoundaryProps> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.log(this.props);
     // log to sentry, azure monitor, trackjs etc..
     console.error('ErrorBoundary caught in error', error, info);
 
@@ -25,7 +24,6 @@ class ErrorBoundary extends Component<IErrorBoundaryProps> {
   }
 
   render(): React.ReactNode {
-    console.log(this.props);
     if (this.state.redirect) return <Redirect to="/" />;
     if (this.state.hasError) {
       return (
