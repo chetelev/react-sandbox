@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx, ts, tsx}\" --quiet",
     "dev": "parcel src/index.html",
     "build": "parcel build",
-    "start": "npm -s run build && node dist/backend/index.js"
+    "start": "npm -s run build && node dist/backend/index.js",
+    "typecheck": "tsc --noEmit"
   },
   "author": "",
   "license": "ISC",
