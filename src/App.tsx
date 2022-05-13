@@ -1,18 +1,16 @@
-import { useState } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
-
 import Details from './Details';
 import SearchParams from './SearchParams';
-import ThemeContext from './ThemeContext';
+import { Link, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 
 // lazy loading
 // const SearchParams = lazy(() => import('./SearchParams'));
 // const Details = lazy(() => import('./Details'));
 
 const App = () => {
-  const theme = useState('gray');
   return (
-    <ThemeContext.Provider value={theme}>
+    <Provider store={store}>
       <div
         className="
         p-0 
@@ -52,7 +50,7 @@ const App = () => {
           </Route>
         </Switch>
       </div>
-    </ThemeContext.Provider>
+    </Provider>
   );
 };
 

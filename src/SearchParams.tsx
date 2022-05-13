@@ -1,23 +1,24 @@
 import Results from './Results';
-import ThemeContext from './ThemeContext';
 import useBreedList from './useBreedList';
 import { Animal, Pet, PetAPIResponse } from './models/APIResponsesTypes';
-import {
-  FunctionComponent,
-  useContext,
-  useEffect,
-  useState
-  } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import changeAnimal from './actionCreators/changeAnimal.js'
+import changeBreed from './actionCreators/changeBreed.js'
+import changeLocation from './actionCreators/changeLocation.js'
 
 const ANIMALS: Animal[] = ['bird', 'cat', 'dog', 'rabbit', 'reptile'];
 
 const SearchParams: FunctionComponent = () => {
-  const [location, setLocation] = useState('');
-  const [animal, setAnimal] = useState('' as Animal);
-  const [breed, setBreed] = useState('');
+  const animal = useSelector(state => state.animal)
+  const location = useSelector(state => state.location)
+  const breed = useSelector({breed} => breed)
+  const theme = useSelector(state => state.theme)
+
+  const dispatch = useDispatch();
+
   const [pets, setPets] = useState([] as Pet[]);
   const [breeds] = useBreedList(animal);
-  const [theme] = useContext(ThemeContext);
 
   useEffect(() => {
     void requestPets();
@@ -45,7 +46,7 @@ const SearchParams: FunctionComponent = () => {
           <input
             id="location"
             type="text"
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => dispatch(changeLocation(e.target.value))}
             value={location}
             placeholder="Location"
             className="w-60 mb-5 block"
@@ -57,8 +58,8 @@ const SearchParams: FunctionComponent = () => {
           <select
             id="animal"
             value={animal}
-            onChange={(e) => setAnimal(e.target.value as Animal)}
-            onBlur={(e) => setAnimal(e.target.value as Animal)}
+            onChange={(e) => dispatch(changeAnimal(e.target.value as Animal))}
+            onBlur={(e) => dispatch(changeAnimal(e.target.value as Animal))}
             className="w-60 mb-5 block"
           >
             <option />
@@ -77,8 +78,8 @@ const SearchParams: FunctionComponent = () => {
           <select
             id="breed"
             value={breed}
-            onChange={(e) => setBreed(e.target.value)}
-            onBlur={(e) => setBreed(e.target.value)}
+            onChange={(e) => dispatch(changeBreed(e.target.value))}
+            onBlur={(e) => dispatch(changeBreed(e.target.value))}
             className="w-60 mb-5 block disabled:opacity-30"
             disabled={!breeds.length}
           >
